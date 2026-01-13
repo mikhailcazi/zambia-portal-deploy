@@ -9,6 +9,8 @@ services:
       - ../backend/.env
     depends_on:
       - db
+    volumes:
+      - ./uploads:/app/uploads
     restart: unless-stopped
 
   frontend:
