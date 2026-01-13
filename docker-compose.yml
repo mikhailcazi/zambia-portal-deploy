@@ -7,6 +7,8 @@ services:
       - "3000:3000"
     env_file:
       - ../backend/.env
+    depends_on:
+      - db
     restart: unless-stopped
 
   frontend:
@@ -16,3 +18,16 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sec_admin
+      POSTGRES_PASSWORD: SECprod2025
+      POSTGRES_DB: zambia_portal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
